@@ -18,6 +18,7 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 @EnableFeignClients(basePackages = "com.zhuoyue.article.feign")
 public class SearchApplication {
     public static void main(String[] args) {
+        System.setProperty("es.set.netty.runtime.available.processors", "false");
         SpringApplication.run(SearchApplication.class, args);
     }
 }

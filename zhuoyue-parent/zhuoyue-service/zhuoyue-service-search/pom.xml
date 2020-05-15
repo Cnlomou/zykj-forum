@@ -13,7 +13,11 @@
 
     <description>搜索微服务</description>
     <dependencies>
-
+        <dependency>
+            <groupId>com.zhuoyue</groupId>
+            <artifactId>zhuoyue-common-db</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>com.zhuoyue</groupId>
             <artifactId>zhuoyue-service-search-api</artifactId>

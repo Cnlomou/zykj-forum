@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @author Linmo
  * @create 2020/4/23 16:59
  */
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableFeignClients(basePackages = {"com.zhuoyue.article.feign", "com.zhuoyue.user.feign", "com.zhuoyue.search.feign"})
 @EnableEurekaClient
 @EnableAsync

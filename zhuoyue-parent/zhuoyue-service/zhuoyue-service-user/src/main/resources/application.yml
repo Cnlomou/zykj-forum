@@ -2,10 +2,16 @@ spring:
   application:
     name: user
   datasource:
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://47.95.119.186:3306/zhuoyue_user?serverTimezone=UTC&characterEncoding=utf8
+    hikari:
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://47.95.119.186:3306/zhuoyue_user?serverTimezone=UTC&characterEncoding=utf8
+  cloud:
+    alibaba:
+      seata:
+        # 这里要和file.conf文件中一致
+        tx-service-group: my_test_tx_group
   redis:
     host: 47.95.215.227
     password: 123456
