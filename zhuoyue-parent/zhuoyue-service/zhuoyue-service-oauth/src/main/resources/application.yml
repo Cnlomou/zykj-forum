@@ -1,0 +1,26 @@
+server:
+  port: 10001
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka/
+  instance:
+    prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
+ribbon:
+  ReadTimeout: 300000
+spring:
+  application:
+    name: user-oauth
+  datasource:
+    url: jdbc:mysql://47.95.119.186:3306/zhuoyue_oauth?serverTimezone=UTC&characterEncoding=utf8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 47.95.215.227
+    password: 123456
+  main:
+    allow-bean-definition-overriding: true

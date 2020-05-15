@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: article
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.95.119.186:3306/zhuoyue_article?serverTimezone=UTC&characterEncoding=utf8
+    hikari:
+      max-lifetime: 30000
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka/
+  instance:
+    prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
+server:
+  port: 8001
+mybatis:
+  configuration:
+    use-generated-keys: true

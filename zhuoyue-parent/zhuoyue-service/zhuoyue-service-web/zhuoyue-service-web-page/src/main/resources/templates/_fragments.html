@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <title th:replace="${title}">卓越论坛 - 一个用于学习的论坛!</title>
+    <!-- 网站说明 -->
+    <meta name="description" content="卓越论坛-一个用于学习的论坛!">
+    <!-- 网站关键字 -->
+    <meta name="Keywords" content="论坛,学习">
+    <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon" th:href="@{/images/favicon.ico}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/semantic-ui/2.4.1/semantic.min.css"
+          th:href="@{/semantic-ui/2.4.1/semantic.min.css}">
+    <link rel="stylesheet" href="../static/css/mystyle.css" th:href="@{/css/mystyle.css}">
+    <script rel="script" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script rel="script" th:src="@{Layui/layui.js}"></script>
+    <style>
+        .recommend > a {
+            text-decoration: none;
+            color: rgba(0, 0, 0, .85);
+            cursor: pointer;
+        }
+
+        .recommend > a:hover {
+            color: #4183c4;
+        }
+    </style>
+</head>
+<body>
+
+<!--导航条-->
+<nav th:fragment="menu(n)" class="ui attached blue segment m-padded-tb-none m-shadow-small">
+    <div class="ui container">
+        <div class="ui stackable secondary menu">
+            <h2 class="ui m-item item blue header m-mobile-show">卓越论坛</h2>
+            <a href="#" th:href="@{/}" class="m-item item m-mobile-none">
+                <img src="../static/images/zyfourm.png" th:src="@{/images/zyfourm.png}" alt="未显示图片" class="ui image">
+            </a>
+            <a href="#" th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active blue'"><i
+                    class="home icon"></i>帖子</a>
+            <!--            <a href="#" th:href="@{/forum}" class="m-item item m-mobile-hide"-->
+            <!--               th:classappend="${n==2} ? 'active blue'"><i class="bookmark icon"></i>论坛</a>-->
+            <a href="#" th:href="@{/section}" class="m-item item m-mobile-hide"
+               th:classappend="${n==3} ? 'active blue'"><i class="th icon"></i>版块</a>
+            <a href="#" th:href="@{/active}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active blue'"><i
+                    class="flag outline icon"></i>活动</a>
+            <a href="#" th:href="@{/userinfo}" class="m-item item m-mobile-hide"
+               th:classappend="${n==5} ? 'active blue'"><i class="question circle icon"></i>个人信息</a>
+            <div class="m-item item menu m-mobile-hide">
+                <div class="ui icon input">
+                    <form name="search" action="#" th:action="@{/search}" target="_blank" method="post">
+                        <div class="ui action left input">
+                            <input name="query" type="text" placeholder="搜索...">
+                            <div class="ui animated button fade">
+                                <div class="visible content">搜索</div>
+                                <div class="hidden content">
+                                    <i class="search icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <a id="model" th:if="${user==null}" class="m-item m-mobile-hide item extra"><i
+                    class="sign-in icon"></i>登录</a>
+            <div th:if="${user} ne null" class="ui m-item item">
+                <div class="ui icon top pointing dropdown">
+                    <img src="../static/images/user.png" th:src="${user.picUrl}" alt="" class="ui avatar image">
+                    <i class="list icon"></i>
+                    <div style="right: -35px;" class="menu" data-filtered="filtered">
+                        <div class="header" data-filtered="filtered"><h5 th:text="${user.name}">卓越科技</h5></div>
+                        <a href="#" th:href="@{userinfo(id=${user.id})}" class="item" data-filtered="filtered">用户信息</a>
+                        <div class="item" data-filtered="filtered">设&nbsp;&nbsp;置</div>
+                        <div class="ui divider" data-filtered="filtered"></div>
+                        <div class="item" id="logout" data-filtered="filtered">登&nbsp;&nbsp;出</div>
+                        <script>
+                            $('#logout').click(function () {
+                                $.get("/user/dologout", {}, function (data) {
+                                    if (data.flag === true) {
+                                        document.location = document.location;
+                                    }
+                                }, 'json');
+                            })
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--移动端 下拉菜单-->
+    <a href="#" class="ui menu toggle icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--底部导航条-->
+<div th:fragment="toolbar" id="toolbar" class="ui m-fixed m-right-bottom m-padded" style="display: none">
+    <div class="ui vertical icon buttons">
+        <a id="toTop-button" class="ui icon button"><i class="up chevron icon"></i></a>
+    </div>
+</div>
+
+<!--登录注册-->
+<div th:fragment="login" class="ui modal" id="sign-in">
+    <div class="ui container">
+        <img src="../static/images/zyfourm.png" th:src="@{/images/zyfourm.png}" alt="未显示图片" class="ui image"
+             style="margin: 20px auto;">
+    </div>
+    <div class="ui pointing secondary menu">
+        <a class="item active" data-tab="first">用户登录</a>
+        <a class="item" data-tab="second">注册账号</a>
+    </div>
+    <i class="close icon"></i>
+    <!--    登陆-->
+    <div class="ui tab active" data-tab="first" style="margin: 20px;">
+        <div class="ui attached message">
+            <div class="header">
+                欢迎访问卓越论坛！
+            </div>
+            <p>通过登录获取更多功能</p>
+        </div>
+        <form class="ui login form attached segment fluid" id="form">
+            <div class="field">
+                <label>账号</label>
+                <input name="username" type="text" placeholder="用户名">
+            </div>
+            <div class="field">
+                <label>密码</label>
+                <input name="password" type="password" placeholder="密码" autocomplete>
+            </div>
+            <div class="inline field">
+                <div class="ui checkbox">
+                    <input type="checkbox" id="terms" name="remember">
+                    <label for="terms">下次自动登录</label>
+                </div>
+            </div>
+            <div class="ui blue button" id="login">登录</div>
+            <div class="ui error message" data-filtered="filtered"></div>
+        </form>
+    </div>
+    <!--    注册-->
+    <div class="ui tab" data-tab="second" style="margin: 20px;">
+        <div class="ui attached message">
+            <div class="header">
+                欢迎访问卓越论坛！
+            </div>
+            <p>注册一个新帐户</p>
+        </div>
+        <form class="ui register form attached fluid segment">
+            <div class="field">
+                <label>用户名</label>
+                <input name="username" type="text" placeholder="用户名">
+            </div>
+            <div class="field">
+                <label>密码</label>
+                <input name="password" type="password" placeholder="密码" autocomplete>
+            </div>
+            <div class="field">
+                <label>邮箱</label>
+                <input name="email" placeholder="邮箱" type="email">
+            </div>
+            <div class="field">
+                <label>验证码</label>
+                <div class="fields">
+                    <div class="ui field action input">
+                        <input name="code" type="text" placeholder="验证码">
+                        <button id="verify" class="ui primary button" onclick="sendMessage()">发送验证码</button>
+                    </div>
+                </div>
+            </div>
+            <div class="inline field">
+                <div class="ui checkbox">
+                    <input type="checkbox" checked disabled>
+                    <label for="terms">同意服务条款</label>
+                </div>
+            </div>
+            <div class="ui blue submit button">注册</div>
+            <div class="ui error message" data-filtered="filtered"></div>
+        </form>
+    </div>
+    <script>
+        $('#login').click(function () {
+            var parm = $("#form").serialize();
+            $.post("/user/dologin", parm, function (data) {
+                if (data.flag === true) {
+                    $('.close.icon').click();
+                    document.location = document.location;
+                }
+                layui.use('layer', function () {
+                    var layer = layui.layer;
+                    layer.msg(data.message, {time: 800});
+                })
+            });
+        });
+    </script>
+</div>
+
+<!--尾部内容-->
+<footer th:fragment="footer" class="ui inverted vertical segment m-padded-tb-large">
+    <div class="ui center aligned container">
+        <p class="m-text-spaced m-text-thin m-opacity-tiny">Copyright © 2019 - 2020 卓越论坛</p>
+    </div>
+</footer>
+
+<!--右边top-->
+<div th:fragment="right_top(nm,par,sid,sn,dp)" class="four wide column">
+    <div class="ui segments">
+        <!--发帖-->
+        <div class="ui segment">
+            <div class="ui two column center aligned grid">
+                <div class="column">
+                    <div class="ui icon header"><i class="edit icon"></i>开始写一篇吧!</div>
+                    <a class="ui primary button"
+                       th:href="@{/edit(mode=${nm},parent=${par},sid=${sid},son=${sn},dopost=${dp})}" href="edit.html">发帖</a>
+                </div>
+            </div>
+        </div>
+
+        <!--版块推荐-->
+        <div class="ui segment">
+            <div class="column"><i class="th large icon"></i> <a href="javascript:void(0)">版块推荐</a></div>
+        </div>
+        <div class="ui segment">
+            <div class="ui grid">
+                <div class="eight wide column recommend" th:each=" item:${recommend}">
+                    <a th:href="@{/forum-section/1(id=${item.content.id},par=${item.parent.name},son=${item.content.name})}">
+                        <img src="../static/images/java.png" style="cursor:pointer" th:src="${item.content.picUrl}"
+                             class="ui avatar image">
+                        <span th:text="${item.content.name}"
+                              style="cursor:pointer;text-decoration: none;color:#4183c4; background-color: transparent; ">Java</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!--最新活动-->
+        <div class="ui segment">
+            <div class="column"><i class="flag outline icon"></i> <a href="">最新活动</a></div>
+        </div>
+        <div class="ui segment">
+            <img src="../static/images/active2.jpg" th:src="@{/images/active2.jpg}" class="ui image">
+        </div>
+        <div class="ui segment">
+            <div class="ui centered card " style="width: 11em">
+                <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" class="ui rounded image">
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--主页的右边top-->
+<div th:fragment="index_right_top" class="four wide column">
+    <div class="ui segments">
+        <!--发帖-->
+        <div class="ui segment">
+            <div class="ui two column center aligned grid">
+                <div class="column">
+                    <div class="ui icon header"><i class="edit icon"></i>去写一篇吧!</div>
+                    <a class="ui primary button" th:href="@{section}" href="edit.html">前去</a>
+                </div>
+            </div>
+        </div>
+
+        <!--版块推荐-->
+        <div class="ui segment">
+            <div class="column"><i class="th large icon"></i> <a href="javascript:void(0)">版块推荐</a></div>
+        </div>
+        <div class="ui segment">
+            <div class="ui grid">
+
+                <div class="eight wide column recommend" th:each=" item:${recommend}">
+                    <a th:href="@{forum-section/1(id=${item.content.id},par=${item.parent.name},son=${item.content.name})}">
+                        <img src="../static/images/java.png" style="cursor:pointer" th:src="${item.content.picUrl}"
+                             class="ui avatar image">
+                        <span th:text="${item.content.name}"
+                              style="cursor:pointer;text-decoration: none;color:#4183c4; background-color: transparent; ">Java</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!--最新活动-->
+        <div class="ui segment">
+            <div class="column"><i class="flag outline icon"></i> <a href="javascript:void(0)">最新活动</a></div>
+        </div>
+        <div class="ui segment">
+            <img src="../static/images/active2.jpg" th:src="@{images/active2.jpg}" class="ui image">
+        </div>
+        <div class="ui segment">
+            <div class="ui centered card " style="width: 11em">
+                <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" class="ui rounded image">
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--js-->
+<th:block th:fragment="scripts">
+    <script src="../static/js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script src="../static/semantic-ui/2.4.1/semantic.min.js" th:src="@{/semantic-ui/2.4.1/semantic.min.js}"></script>
+    <script src="../static/lib/waypoints/jquery.waypoints.min.js"
+            th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+    <script src="../static/js/jquery.scrollTo.min.js" th:src="@{/js/jquery.scrollTo.min.js}"></script>
+    <script src="../static/js/diystyle.js" th:src="@{/js/diystyle.js}"></script>
+</th:block>
+</body>
+</html>

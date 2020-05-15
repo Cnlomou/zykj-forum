@@ -1,0 +1,29 @@
+spring:
+  thymeleaf:
+    mode: HTML
+    cache: false
+  application:
+    name: web-page
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka/
+  instance:
+    prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
+server:
+  port: 9001
+ribbon:
+  ReadTimeout: 300000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+index-page: http://localhost:${server.port}

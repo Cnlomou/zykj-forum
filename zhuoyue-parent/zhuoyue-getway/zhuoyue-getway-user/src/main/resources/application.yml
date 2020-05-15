@@ -1,0 +1,89 @@
+server:
+  port: 9001
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka/
+  instance:
+    prefer-ip-address: true
+spring:
+  application:
+    name: getway-web
+  cloud:
+    gateway:
+      routes:
+        - id: zhuoyue-article-route
+          uri: lb://article
+          predicates:
+            - Path=/plate/**,/article/**,/comment/**,/recomment/**
+          filters:
+            #请求限流
+            - name: RequestRateLimiter
+              args:
+                keyResolver: "#{@ipkeyresolver}"
+                #每秒运行的请求
+                redis-rate-limiter.replenishRate: 10
+                #桶的大小
+                redis-rate-limiter.burstCapacity: 30
+                #每个请求消耗的令牌数
+                redis-rate-limiter.requestedTokens: 1
+        - id: zhuoyue-user-route
+          uri: lb://user
+          predicates:
+            - Path=/rule/**,/user/**
+          filters:
+            #请求限流
+            - name: RequestRateLimiter
+              args:
+                keyResolver: "#{@ipkeyresolver}"
+                #每秒运行的请求
+                redis-rate-limiter.replenishRate: 10
+                #桶的大小
+                redis-rate-limiter.burstCapacity: 30
+                #每个请求消耗的令牌数
+                redis-rate-limiter.requestedTokens: 1
+        - id: zhuoyue-content-route
+          uri: lb://content
+          predicates:
+            - Path=/category/**,/content/**
+          filters:
+            #请求限流
+            - name: RequestRateLimiter
+              args:
+                keyResolver: "#{@ipkeyresolver}"
+                #每秒运行的请求
+                redis-rate-limiter.replenishRate: 5
+                #桶的大小
+                redis-rate-limiter.burstCapacity: 20
+                #每个请求消耗的令牌数
+                redis-rate-limiter.requestedTokens: 1
+        - id: zhuoyue-file-route
+          uri: lb://file
+          predicates:
+            - Path=/file/**,/filelog/**
+          filters:
+            #请求限流
+            - name: RequestRateLimiter
+              args:
+                keyResolver: "#{@ipkeyresolver}"
+                #每秒运行的请求
+                redis-rate-limiter.replenishRate: 10
+                #桶的大小
+                redis-rate-limiter.burstCapacity: 60
+                #每个请求消耗的令牌数
+                redis-rate-limiter.requestedTokens: 1
+      filter:
+        request-rate-limiter:
+          #空key状态码404
+          empty-key-status-code: 404
+  redis:
+    host: 47.95.215.227
+    password: 123456
+    timeout: 30000
+management:
+  endpoint:
+    gateway:
+      enabled: true
+    web:
+      exposure:
+        include: true

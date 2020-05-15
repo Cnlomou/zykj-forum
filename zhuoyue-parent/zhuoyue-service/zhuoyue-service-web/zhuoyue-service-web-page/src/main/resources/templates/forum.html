@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: head(~{::title})">
+    <title>论坛 - 卓越论坛</title>
+</head>
+<body>
+
+<!--导航条-->
+<nav th:replace="_fragments :: menu(2)" class="ui attached blue segment m-padded-tb-none m-shadow-small">
+</nav>
+
+<!--登录注册-->
+<div th:replace="_fragments :: login" class="ui modal" id="sign-in">
+</div>
+
+<!--中间内容-->
+<div id="waypoint" class="m-container-small m-padded-tb-big">
+    <div class="ui stackable grid">
+        <!--左边最新帖子-->
+        <div class="twelve wide column">
+            <!--头部内容-->
+            <div class="ui attached segment">
+                <div class="ui two column grid">
+                    <div class="ui column">
+                        <a href="#">全部</a>
+                        <span class="divider">|</span>
+                        <a href="#">热门</a>
+                        <span class="divider">|</span>
+                        <a href="#">精华</a>
+                    </div>
+                    <div class="ui right aligned column">
+                        <div class="ui inline dropdown">
+                            <div class="text">默认排序</div>
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <div class="item">默认排序</div>
+                                <div class="item">热门</div>
+                                <div class="item">最后发表</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--中间内容-->
+            <div class="ui attached segment">
+                <div class="ui padded vertical segment m-padded-tb m-mobile-lr-clear">
+                    <div class="ui items">
+                        <div class="item">
+                            <img src="../static/images/rachel.png" th:src="@{/images/rachel.png}"
+                                 class="ui circular image" style="height: 50px;width: 50px">
+                            <div class="content">
+                                <a class="header">卓越科技的个人博客介绍</a>
+                                <div class="description">
+                                    <div class="ui mini horizontal link list">
+                                        <div class="item">
+                                            <div class="content"><a href="#" class="header">卓越科技</a></div>
+                                        </div>
+                                        <div class="item">
+                                            <i class="calendar icon"></i> 2019-08-07
+                                        </div>
+                                        <div class="item">
+                                            <i class="flag icon"></i> 360动态
+                                        </div>
+                                        <div class="item">
+                                            <i class="caret square down outline icon"></i> 置顶
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="extra">
+                                    <div class="ui right floated primary">
+                                        <a href=""><i class="eye icon"></i> <span>10W+</span></a>
+                                        <span class="divider">|</span>
+                                        <a href=""><i class="comment icon"></i> <span>5000</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui padded vertical segment m-padded-tb m-mobile-lr-clear">
+                    <div class="ui items">
+                        <div class="item">
+                            <img src="../static/images/rachel.png" th:src="@{/images/rachel.png}"
+                                 class="ui circular image" style="height: 50px;width: 50px">
+                            <div class="content">
+                                <a class="header">卓越科技的个人博客介绍</a>
+                                <div class="description">
+                                    <div class="ui mini horizontal link list">
+                                        <div class="item">
+                                            <div class="content"><a href="#" class="header">卓越科技</a></div>
+                                        </div>
+                                        <div class="item">
+                                            <i class="calendar icon"></i> 2019-08-07
+                                        </div>
+                                        <div class="item">
+                                            <i class="flag icon"></i> 360动态
+                                        </div>
+                                        <div class="item">
+                                            <i class="caret square down outline icon"></i> 置顶
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="extra">
+                                    <div class="ui right floated primary">
+                                        <a href=""><i class="eye icon"></i> <span>10W+</span></a>
+                                        <span class="divider">|</span>
+                                        <a href=""><i class="comment icon"></i> <span>5000</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui padded vertical segment m-padded-tb m-mobile-lr-clear">
+                    <div class="ui items">
+                        <div class="item">
+                            <img src="../static/images/rachel.png" th:src="@{/images/rachel.png}"
+                                 class="ui circular image" style="height: 50px;width: 50px">
+                            <div class="content">
+                                <a class="header">卓越科技的个人博客介绍</a>
+                                <div class="description">
+                                    <div class="ui mini horizontal link list">
+                                        <div class="item">
+                                            <div class="content"><a href="#" class="header">卓越科技</a></div>
+                                        </div>
+                                        <div class="item">
+                                            <i class="calendar icon"></i> 2019-08-07
+                                        </div>
+                                        <div class="item">
+                                            <i class="flag icon"></i> 360动态
+                                        </div>
+                                        <div class="item">
+                                            <i class="caret square down outline icon"></i> 置顶
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="extra">
+                                    <div class="ui right floated primary">
+                                        <a href=""><i class="eye icon"></i> <span>10W+</span></a>
+                                        <span class="divider">|</span>
+                                        <a href=""><i class="comment icon"></i> <span>5000</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--导航栏-->
+            <div class="ui attached segment pagebar">
+                <div class="ui right floated pagination menu ">
+                    <a class="item">1</a>
+                    <a class="item">2</a>
+                    <a class="item">3</a>
+                    <a class="item">4</a>
+                    <a class="item">5</a>
+                </div>
+
+            </div>
+        </div>
+
+        <!--右边top-->
+        <div class="four wide column" th:replace="_fragments :: right_top">
+        </div>
+    </div>
+</div>
+
+<!--底部导航条-->
+<div th:replace="_fragments :: toolbar" id="toolbar" class="ui m-fixed m-right-bottom m-padded" style="display: none">
+</div>
+
+<!--尾部内容-->
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-large">
+</footer>
+
+<div th:replace="_fragments :: scripts">
+</div>
+
+</body>
+</html>

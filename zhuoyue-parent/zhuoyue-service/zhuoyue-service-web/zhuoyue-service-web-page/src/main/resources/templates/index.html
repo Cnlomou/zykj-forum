@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: head(~{::title})">
+    <title>卓越论坛</title>
+</head>
+<body>
+
+<!--导航条-->
+<nav th:replace="_fragments :: menu(1)" class="ui attached blue segment m-padded-tb-none m-shadow-small">
+</nav>
+
+<!--登录注册-->
+<div th:replace="_fragments :: login" class="ui modal" id="sign-in">
+</div>
+
+<!--中间内容-->
+<div id="waypoint" class="m-container-small m-padded-tb-large">
+    <div class="ui stackable grid">
+        <!--左边最新帖子-->
+        <div class="twelve wide column">
+
+            <!--广告轮播图-->
+            <div class="m-mobile-hide carousel">
+                <ul class="pic">
+                    <li><a href="#"><img src="../static/images/active1.jpg" th:src="@{/images/active1.jpg}" alt=""></a>
+                    </li>
+                    <li><a href="#"><img src="../static/images/active2.jpg" th:src="@{/images/active1.jpg}" alt=""></a>
+                    </li>
+                    <li><a href="#"><img src="../static/images/active3.jpg" th:src="@{/images/active1.jpg}" alt=""></a>
+                    </li>
+                    <li><a href="#"><img src="../static/images/active4.jpg" th:src="@{/images/active1.jpg}" alt=""></a>
+                    </li>
+                    <li><a href="#"><img src="../static/images/active5.jpg" th:src="@{/images/active1.jpg}" alt=""></a>
+                    </li>
+                </ul>
+                <a class="btn prev" href="#"><i class="ui angle left icon" style="margin-top: 20%"></i></a>
+                <a class="btn next" href="#"><i class="ui angle right icon" style="margin-top: 20%"></i></a>
+            </div>
+
+            <!--中间内容-->
+            <div class="ui attached segment ">
+                <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
+                    <div class="ui mobile reversed stackable grid">
+                        <!--图片区域-->
+                        <div class="five wide column">
+                            <a href="#" target="_blank">
+                                <img src="../static/images/miku800x400.png" th:src="@{/images/miku800x400.png}"
+                                     class="ui rounded image">
+                            </a>
+                        </div>
+                        <!--帖子内容-->
+                        <div class="eleven wide column">
+                            <h3 class="ui header"><a href="#">卓越科技的个人博客介绍</a></h3>
+                            <p class="m-text">
+                                卓越人生，只为科技。欢迎来到我的个人博客。分享动漫混剪和实用又好玩的电脑教程。点击进入我的首页查看更多内容！卓越人生，只为科技。欢迎来到我的个人博客。分享动漫混剪和实用又好玩的电脑教程。点击进入我的首页查看更多内容！<a
+                                    href="#"><i class="angle double right icon"></i>全文</a></p>
+                            <div class="ui stackable grid">
+                                <div class="twelve wide column">
+                                    <div class="ui mini horizontal link list">
+                                        <div class="item">
+                                            <div class="content">
+                                                <a href="#" class="header">360动态</a>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <img src="../static/images/user.png" th:src="@{/images/user.png}"
+                                                 class="ui avatar image">
+                                            <div class="content">
+                                                <a href="#" class="header">发帖人</a>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="content">
+                                                <i class="calendar icon"></i> 2019-08-07
+                                            </div>
+
+                                        </div>
+                                        <div class="item">
+                                            <div class="content">
+                                                <i class="eye icon"></i> 10W+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right aligned four wide column">
+                                    <a href="#" target="_blank"><i class="share icon"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
+                    <div class="ui mobile reversed stackable grid">
+                        <!--图片区域-->
+                        <div class="five wide column">
+                            <a href="#" target="_blank">
+                                <img src="../static/images/miku800x400.png" th:src="@{/images/miku800x400.png}"
+                                     class="ui rounded image">
+                            </a>
+                        </div>
+                        <!--帖子内容-->
+                        <div class="eleven wide column">
+                            <h3 class="ui header"><a href="#">卓越科技的个人博客介绍</a></h3>
+                            <p class="m-text">
+                                卓越人生，只为科技。欢迎来到我的个人博客。分享动漫混剪和实用又好玩的电脑教程。点击进入我的首页查看更多内容！卓越人生，只为科技。欢迎来到我的个人博客。分享动漫混剪和实用又好玩的电脑教程。点击进入我的首页查看更多内容！<a
+                                    href="#"><i class="angle double right icon"></i>全文</a></p>
+                            <div class="ui stackable grid">
+                                <div class="twelve wide column">
+                                    <div class="ui mini horizontal link list">
+                                        <div class="item">
+                                            <div class="content">
+                                                <a href="#" class="header">360动态</a>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <img src="../static/images/user.png" th:src="@{/images/user.png}"
+                                                 class="ui avatar image">
+                                            <div class="content">
+                                                <a href="#" class="header">发帖人</a>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="content">
+                                                <i class="calendar icon"></i> 2019-08-07
+                                            </div>
+
+                                        </div>
+                                        <div class="item">
+                                            <div class="content">
+                                                <i class="eye icon"></i> 10W+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right aligned four wide column">
+                                    <a href="#" target="_blank"><i class="share icon"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
+                    <div class="ui mobile reversed stackable grid">
+                        <!--图片区域-->
+                        <div class="five wide column">
+                            <a href="#" target="_blank">
+                                <img src="../static/images/miku800x400.png" th:src="@{/images/miku800x400.png}"
+                                     class="ui rounded image">
+                            </a>
+                        </div>
+                        <!--帖子内容-->
+                        <div class="eleven wide column">
+                            <h3 class="ui header"><a href="#">卓越科技的个人博客介绍</a></h3>
+                            <p class="m-text">
+                                卓越人生，只为科技。欢迎来到我的个人博客。分享动漫混剪和实用又好玩的电脑教程。点击进入我的首页查看更多内容！卓越人生，只为科技。欢迎来到我的个人博客。分享动漫混剪和实用又好玩的电脑教程。点击进入我的首页查看更多内容！<a
+                                    href="#"><i class="angle double right icon"></i>全文</a></p>
+                            <div class="ui stackable grid">
+                                <div class="twelve wide column">
+                                    <div class="ui mini horizontal link list">
+                                        <div class="item">
+                                            <div class="content">
+                                                <a href="#" class="header">360动态</a>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <img src="../static/images/user.png" th:src="@{/images/user.png}"
+                                                 class="ui avatar image">
+                                            <div class="content">
+                                                <a href="#" class="header">发帖人</a>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="content">
+                                                <i class="calendar icon"></i> 2019-08-07
+                                            </div>
+
+                                        </div>
+                                        <div class="item">
+                                            <div class="content">
+                                                <i class="eye icon"></i> 10W+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right aligned four wide column">
+                                    <a href="#" target="_blank"><i class="share icon"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
+                    <div class="ui mobile reversed stackable grid">
+                        <!--图片区域-->
+                        <div class="five wide column">
+                            <a href="#" target="_blank">
+                                <img src="../static/images/miku800x400.png" th:src="@{/images/miku800x400.png}"
+                                     class="ui rounded image">
+                            </a>
+                        </div>
+                        <!--帖子内容-->
+                        <div class="eleven wide column">
+                            <h3 class="ui header"><a href="#">卓越科技的个人博客介绍</a></h3>
+                            <p class="m-text">
+                                卓越人生，只为科技。欢迎来到我的个人博客。分享动漫混剪和实用又好玩的电脑教程。点击进入我的首页查看更多内容！卓越人生，只为科技。欢迎来到我的个人博客。分享动漫混剪和实用又好玩的电脑教程。点击进入我的首页查看更多内容！<a
+                                    href="#"><i class="angle double right icon"></i>全文</a></p>
+                            <div class="ui stackable grid">
+                                <div class="twelve wide column">
+                                    <div class="ui mini horizontal link list">
+                                        <div class="item">
+                                            <div class="content">
+                                                <a href="#" class="header">360动态</a>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <img src="../static/images/user.png" th:src="@{/images/user.png}"
+                                                 class="ui avatar image">
+                                            <div class="content">
+                                                <a href="#" class="header">发帖人</a>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="content">
+                                                <i class="calendar icon"></i> 2019-08-07
+                                            </div>
+
+                                        </div>
+                                        <div class="item">
+                                            <div class="content">
+                                                <i class="eye icon"></i> 10W+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right aligned four wide column">
+                                    <a href="#" target="_blank"><i class="share icon"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--导航栏-->
+            <div class="ui attached segment pagebar">
+                <div class="ui right floated pagination menu ">
+                    <a class="item">1</a>
+                    <a class="item">2</a>
+                    <a class="item">3</a>
+                    <a class="item">4</a>
+                    <a class="item">5</a>
+                </div>
+            </div>
+        </div>
+
+        <!--右边top-->
+        <div class="four wide column" th:replace="_fragments :: index_right_top">
+        </div>
+    </div>
+</div>
+
+<!--底部导航条-->
+<div th:replace="_fragments :: toolbar" id="toolbar" class="ui m-fixed m-right-bottom m-padded" style="display: none">
+</div>
+
+<!--尾部内容-->
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-large">
+</footer>
+
+
+<script th:inline="javascript">
+    var msg = [[${msg==null?'':msg}]];
+    if (msg !== "") {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.msg(msg, {time: 800});
+        })
+    }
+</script>
+<div th:replace="_fragments :: scripts">
+</div>
+
+
+</body>
+</html>

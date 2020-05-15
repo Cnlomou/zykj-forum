@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: head(~{::title})">
+    <title>板块 - 卓越论坛</title>
+</head>
+<body>
+
+<!--导航条-->
+<nav th:replace="_fragments :: menu(3)" class="ui attached blue segment m-padded-tb-none m-shadow-small">
+</nav>
+
+<!--登录注册-->
+<div th:replace="_fragments :: login" class="ui modal" id="sign-in">
+</div>
+
+<!--中间内容-->
+<div id="waypoint" class="m-container-small m-padded-tb-big ">
+    <div class="ui container segment">
+        <div class="ui vertical segment" th:each="map : ${section}">
+            <h3 class="header" style="font-weight: 400" th:text="${map.key.name}">编程</h3>
+            <div class="ui four column grid m-margin-lr m-padded-t-mini" th:each="row: ${map.value.data}">
+                <div class="column" th:each="col : ${row}">
+                    <div class="ui items">
+                        <div class="item">
+                            <a href="#" th:href="@{forum-section/1(id=${col.id})}" class="ui circular image">
+                                <img src="../static/images/rachel.png" th:src="${col.picUrl}"
+                                     style="height: 50px;width: 50px">
+                            </a>
+                            <div class="content">
+                                <a href="#"
+                                   th:href="@{forum-section/1(id=${col.id},par=${map.key.name},son=${col.name})}"
+                                   class="header" th:text="${col.name}">C/C++</a>
+                                <div class="description">
+                                    <div class="ui mini horizontal link list">
+                                        <div class="item">
+                                            <i class="tag icon"></i> 帖数: <span th:text="${col.conCount}">120</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部导航条-->
+<div th:replace="_fragments :: toolbar" id="toolbar" class="ui m-fixed m-right-bottom m-padded" style="display: none">
+    <div class="ui vertical icon buttons">
+        <a id="toTop-button" class="ui icon button"><i class="up chevron icon"></i></a>
+    </div>
+</div>
+
+<!--尾部内容-->
+<!--<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-large">-->
+<!--    <div class="ui center aligned container">-->
+<!--        <p class="m-text-spaced m-text-thin m-opacity-tiny">Copyright © 2019 - 2020 卓越论坛</p>-->
+<!--    </div>-->
+<!--</footer>-->
+
+
+<div th:replace="_fragments :: scripts">
+</div>
+</body>
+</html>

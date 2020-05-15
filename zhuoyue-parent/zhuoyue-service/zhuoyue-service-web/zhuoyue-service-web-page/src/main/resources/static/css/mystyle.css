@@ -1,0 +1,314 @@
+body {
+    background: url("../images/bg.png");
+}
+
+/*-------padded-------*/
+.m-padded {
+    padding: 2em !important;
+}
+
+.m-padded-tb-none {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.m-padded-tb-mini {
+    /*1em=12像素 由于semantic需要提升级别加 !important */
+    padding-top: 0.2em !important;
+    padding-bottom: 0.2em !important;
+}
+
+
+.m-padded-tb {
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+}
+
+.m-padded-tb-large {
+    padding-top: 2em !important;
+    padding-bottom: 2em !important;
+}
+
+.m-padded-tb-big {
+    padding-top: 3em !important;
+    padding-bottom: 3em !important;
+}
+
+.m-padded-lr-responsive {
+    padding-left: 4em !important;
+    padding-right: 4em !important;
+}
+
+.m-padded-lr-big {
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+}
+
+.m-padded-t-mini {
+    padding-top: 2em !important;
+    padding-bottom: 0 !important;
+}
+
+.m-padded-t {
+    padding-top: 2em !important;
+    padding-bottom: 0 !important;
+}
+
+.m-padded-tb-bt {
+    padding-top: 12px !important;
+    padding-bottom: 0 !important;
+}
+
+.m-padded-t-mini {
+    padding-top: 0.5em !important;
+    padding-bottom: 0 !important;
+}
+
+
+/*-------text-------*/
+.m-text {
+    font-weight: 300 !important;
+    letter-spacing: 1px !important;
+    line-height: 1.8;
+}
+
+.m-text-thin {
+    font-weight: 300 !important;
+}
+
+.m-text-spaced {
+    letter-spacing: 1px !important;
+}
+
+.m-text-line {
+    line-height: 1.8 !important;
+}
+
+
+/*-------margin-------*/
+.m-margin-top {
+    margin-top: 1em !important;
+}
+
+.m-margin-top-large {
+    margin-top: 2em !important;
+}
+
+.m-margin-lr {
+    margin-right: 0.5em !important;
+    margin-left: 0.5em !important;
+}
+
+/*-------opacity-------*/
+.m-opacity-mini {
+    opacity: 0.8 !important;
+}
+
+/*-------display-------*/
+.m-inline-block {
+    display: inline-block !important;
+}
+
+/*-------container-------*/
+.m-container-large {
+    max-width: 130em !important;
+    margin: auto !important;
+}
+
+.m-container {
+    max-width: 80em !important;
+    margin: auto !important;
+}
+
+.m-container-small {
+    max-width: 100em !important;
+    margin: auto !important;
+}
+
+/*-------color-------*/
+.m-black {
+    color: #333 !important;
+}
+
+/*-------position-------*/
+.m-right-top {
+    position: absolute !important;
+    top: 0;
+    right: 1em;
+}
+
+.m-mobile-show {
+    display: none !important;
+}
+
+.m-fixed {
+    position: fixed !important;
+    z-index: 10 !important;
+}
+
+.m-right-bottom {
+    bottom: 0 !important;
+    right: 0 !important;
+}
+
+/*-------shadow-------*/
+.m-shadow-small {
+    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.pagebar:after {
+    content: '' !important;
+    clear: both !important;
+    display: block !important;
+}
+
+#imgdialog {
+    width: 500px;
+    margin: 0;
+}
+
+#sign-in {
+    width: 400px;
+    margin: 0;
+}
+
+
+.ui.modal > .close {
+    top: 0;
+    right: 0;
+    color: grey;
+}
+
+.extra:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/*轮播图 相关 清除内外边距*/
+html, body, ul, ol, li, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img {
+    margin: 0;
+    padding: 0;
+}
+
+.carousel ul, li {
+    list-style: none;
+}
+
+.carousel {
+    height: 400px;
+    width: 720px;
+    margin: 0 auto 30px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.pic {
+    width: auto;
+    height: 400px;
+    position: absolute;
+    left: -720px;
+}
+
+.pic li {
+    width: 720px;
+    height: 400px;
+    float: left;
+}
+
+.pic li img {
+    width: 720px;
+    height: 400px;
+    /*margin: 0 auto;*/
+}
+
+.btn {
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+    width: 20px;
+    height: 30px;
+    background: rgba(0, 0, 0, .3);
+    cursor: pointer;
+}
+
+.prev {
+    left: 0;
+    border-radius: 0 50% 50% 0;
+}
+
+.next {
+    right: 0;
+    border-radius: 50% 0 0 50%;
+}
+
+.nav {
+    position: absolute;
+    left: 50%;
+    margin-left: -35px;
+    bottom: 15px;
+    width: 75px;
+    height: 13px;
+    background: rgba(255, 255, 255, .3);
+    border-radius: 7px;
+}
+
+.nav li {
+    float: left;
+    width: 9px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    margin: 3px;
+    cursor: pointer;
+}
+
+.nav .select {
+    background-color: #ff5000;
+}
+
+#waypoint .button {
+    margin-right: 18px !important;
+}
+
+@media screen and (max-width: 1050px) {
+    .displaynone {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .m-mobile-none {
+        display: none !important;
+    }
+
+    .m-mobile-hide {
+        display: none !important;
+    }
+
+    .m-mobile-show {
+        display: block !important;
+    }
+
+    .m-padded-lr-responsive {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .m-mobile-lr-clear {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .m-mobile-wide {
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .carousel {
+        display: none;
+    }
+}

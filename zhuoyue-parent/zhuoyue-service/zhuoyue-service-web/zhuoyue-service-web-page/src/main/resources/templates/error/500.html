@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>500 - 卓越论坛</title>
+    <!-- 网站说明 -->
+    <meta name="description" content="卓越论坛-一个用于学习的论坛!">
+    <!-- 网站关键字 -->
+    <meta name="Keywords" content="论坛,学习">
+    <link rel="icon" href="../../static/images/favicon.ico" type="image/x-icon" th:href="@{/images/favicon.ico}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/semantic-ui/2.4.1/semantic.min.css"
+          th:href="@{/semantic-ui/2.4.1/semantic.min.css}">
+    <link rel="stylesheet" href="../../static/css/mystyle.css" th:href="@{/css/mystyle.css}">
+</head>
+
+<!--导航条-->
+<nav class="ui attached blue segment m-padded-tb-none m-shadow-small">
+    <div class="ui container">
+        <div class="ui stackable secondary menu">
+            <h2 class="ui m-item item blue header m-mobile-show">卓越论坛</h2>
+            <a href="#" th:href="${redir}" class="m-item item m-mobile-none">
+                <img src="../../static/images/zyfourm.png" alt="" class="ui image">
+            </a>
+            <a href="#" th:href="${redir}" class="m-item item active blue m-mobile-hide"><i
+                    class="home icon"></i>返回首页</a>
+        </div>
+    </div>
+
+    <!--移动端 下拉菜单-->
+    <a href="#" class="ui menu toggle icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+
+<!--中间内容-->
+<div class="m-container-small" style="height: 500px;margin-top: 200px!important;">
+    <div class="ui container">
+        <div class="ui error message">
+            <div class="header">
+                500错误
+            </div>
+            <ul class="list">
+                <li>服务器有点累了</li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--尾部内容-->
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-large">
+    <div class="ui center aligned container">
+        <p class="m-text-spaced m-text-thin m-opacity-tiny">Copyright © 2019 - 2020 卓越论坛</p>
+    </div>
+</footer>
+
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+<script src="../../static/js/jquery-3.4.1.min.js"></script>
+<script src="../../static/semantic-ui/2.4.1/semantic.min.js"></script>
+<script src="../../static/js/diystyle.js"></script>
+<!--/*/</th:block>/*/-->
+
+</body>
+</html>

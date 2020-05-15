@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人资料 - 一个用于学习的论坛!</title>
+    <!-- 网站说明 -->
+    <meta name="description" content="卓越论坛-一个用于学习的论坛!">
+    <!-- 网站关键字 -->
+    <meta name="Keywords" content="论坛,学习">
+    <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon" th:href="@{/images/favicon.ico}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/semantic-ui/2.4.1/semantic.min.css"
+          th:href="@{/semantic-ui/2.4.1/semantic.min.css}">
+    <link rel="stylesheet" href="../static/css/mystyle.css" th:href="@{/css/mystyle.css}">
+    <link rel="stylesheet" href="../static/css/cropper.min.css" th:href="@{/css/cropper.min.css}">
+</head>
+<body>
+
+<!--导航条-->
+<nav th:replace="_fragments :: menu(5)" class="ui attached blue segment m-padded-tb-none m-shadow-small">
+    <div class="ui container">
+        <div class="ui stackable secondary menu">
+            <h2 class="ui m-item item blue header m-mobile-show">卓越论坛</h2>
+            <a href="#" class="m-item item m-mobile-none">
+                <img src="../static/images/zyfourm.png" alt="" class="ui image">
+            </a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>帖子</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="bookmark icon"></i>论坛</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="th icon"></i>版块</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="flag outline icon"></i>活动</a>
+            <a href="#" class="m-item active blue item m-mobile-hide"><i class="question circle icon"></i>个人信息</a>
+            <div class="m-item item menu m-mobile-hide">
+                <div class="ui icon input">
+                    <form name="search" action="#" target="_blank" method="post">
+                        <div class="ui action left input">
+                            <input name="query" type="text" placeholder="搜索...">
+                            <div class="ui animated button fade">
+                                <div class="visible content">搜索</div>
+                                <div class="hidden content">
+                                    <i class="search icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="m-item ui item m-mobile-hide">
+                <div class="ui icon top pointing dropdown">
+                    <img src="../static/images/user.png" alt="" class="ui avatar image">
+                    <i class="list icon"></i>
+                    <div style="right: -35px;" class="menu" data-filtered="filtered">
+                        <div class="header" data-filtered="filtered"><h5>卓越科技</h5></div>
+                        <a href="#" class="item" data-filtered="filtered">用户信息</a>
+                        <div class="item" data-filtered="filtered">设&nbsp;&nbsp;置</div>
+                        <div class="ui divider" data-filtered="filtered"></div>
+                        <div class="item" data-filtered="filtered">登&nbsp;&nbsp;出</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--移动端 下拉菜单-->
+    <a href="#" class="ui menu toggle icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--弹出框-->
+<div id="imgdialog" class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">
+        <h5>修改头像</h5>
+    </div>
+    <label title="上传图片" for="chooseImg" class="ui primary button" style="margin: 1.25rem 1.25rem 0 1.25rem">
+        <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden"
+               style="display: none;"
+               onchange="selectImg(this)">选择图片
+    </label>
+    <div class="image content">
+        <div class="ui medium image">
+            <div id="showimg" style="width: 300px;height: 300px;border: solid 1px #ddd;">
+                <img id="tailoringImg">
+            </div>
+        </div>
+        <div class="description m-mobile-hide">
+            <div class="ui medium image" style="margin-left: 1.25rem">
+                <div>
+                    <h4>图片预览：</h4>
+                    <div class="previewImg"
+                         style="margin-top: 10px;border: solid 1px #ddd;width: 100px;height: 100px;overflow: hidden;"></div>
+                    <div class="previewImg"
+                         style="border-radius: 100%;margin-top: 10px;border: solid 1px #ddd;    width: 100px;height: 100px;overflow: hidden;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button class="ui primary ok button" id="sureCut">确定</button>
+    </div>
+</div>
+
+
+<!--中间内容-->
+<div class="ui container m-padded-tb-big">
+    <div class="ui breadcrumb">
+        <a class="section"><i class="home icon"></i></a>
+        <i class="right angle icon divider"></i>
+        <div class="active section">个人资料</div>
+    </div>
+    <div class="ui segment">
+        <div class="ui secondary pointing menu">
+            <a class="item active" data-tab="first">修改头像</a>
+            <a class="item" data-tab="second">个人资料</a>
+        </div>
+        <div class="ui tab segment active" data-tab="first">
+            <h5>当前我的头像</h5>
+            <br>
+            <img src="../static/images/rachel.png" id="finalImg" class="ui circular image"
+                 style="height: 100px;width: 100px">
+            <br>
+            <h5>设置我的新头像</h5>
+            <br>
+            <p>请选择一个新照片进行上传编辑。
+                头像保存后，您可能需要刷新一下本页面(按F5键)，才能查看最新的头像效果</p>
+            <div class="ui placeholder segment">
+                <div class="ui icon header">
+                    <i class="file icon"></i>
+                </div>
+                <div id="model" class="ui primary button">添加图片</div>
+            </div>
+        </div>
+        <div class="ui tab segment" data-tab="second">
+            <form class="ui form">
+                <h4 class="ui dividing header">基本资料</h4>
+                <div class="field">
+                    <label>用户名</label>
+                    <div class="fields">
+                        <div class="three wide field">
+                            <input type="text" name="username">
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>性别</label>
+                    <div class="fields">
+                        <div class="two wide field">
+                            <div class="ui selection dropdown">
+                                <input type="hidden" name="gender" data-filtered="filtered">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">性别</div>
+                                <div class="menu" data-filtered="filtered">
+                                    <div class="item" data-value="1" data-filtered="filtered">男性</div>
+                                    <div class="item" data-value="0" data-filtered="filtered">女性</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="field">
+                    <label>手机</label>
+                    <div class="fields">
+                        <div class="three wide field">
+                            <input type="text" name="phone">
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>生日</label>
+                    <div class="fields">
+                        <div class="six wide field">
+                            <div class="three fields">
+                                <div class="field">
+                                    <select class="ui fluid search dropdown" name="card[expire-month]">
+                                        <option value="" data-filtered="filtered">年</option>
+                                        <option value="1" data-filtered="filtered">2010</option>
+                                        <option value="2" data-filtered="filtered">3</option>
+                                        <option value="3" data-filtered="filtered">4</option>
+                                        <option value="4" data-filtered="filtered">5</option>
+                                        <option value="5" data-filtered="filtered">6</option>
+                                        <option value="6" data-filtered="filtered">7</option>
+                                        <option value="7" data-filtered="filtered">8</option>
+                                        <option value="8" data-filtered="filtered">9</option>
+                                        <option value="9" data-filtered="filtered">10</option>
+                                        <option value="10" data-filtered="filtered">11</option>
+                                        <option value="11" data-filtered="filtered">12</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <select class="ui fluid search dropdown" name="card[expire-month]">
+                                        <option value="" data-filtered="filtered">月</option>
+                                        <option value="1" data-filtered="filtered">2</option>
+                                        <option value="2" data-filtered="filtered">3</option>
+                                        <option value="3" data-filtered="filtered">4</option>
+                                        <option value="4" data-filtered="filtered">5</option>
+                                        <option value="5" data-filtered="filtered">6</option>
+                                        <option value="6" data-filtered="filtered">7</option>
+                                        <option value="7" data-filtered="filtered">8</option>
+                                        <option value="8" data-filtered="filtered">9</option>
+                                        <option value="9" data-filtered="filtered">10</option>
+                                        <option value="10" data-filtered="filtered">11</option>
+                                        <option value="11" data-filtered="filtered">12</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <select class="ui fluid search dropdown" name="card[expire-month]">
+                                        <option value="" data-filtered="filtered">日</option>
+                                        <option value="1" data-filtered="filtered">2</option>
+                                        <option value="2" data-filtered="filtered">3</option>
+                                        <option value="3" data-filtered="filtered">4</option>
+                                        <option value="4" data-filtered="filtered">5</option>
+                                        <option value="5" data-filtered="filtered">6</option>
+                                        <option value="6" data-filtered="filtered">7</option>
+                                        <option value="7" data-filtered="filtered">8</option>
+                                        <option value="8" data-filtered="filtered">9</option>
+                                        <option value="9" data-filtered="filtered">10</option>
+                                        <option value="10" data-filtered="filtered">11</option>
+                                        <option value="11" data-filtered="filtered">12</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui button" tabindex="0">保存</div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--尾部内容-->
+<footer class="ui inverted vertical segment m-padded-tb-big">
+    <div class="ui center aligned container">
+        <p class="m-text-spaced m-text-thin m-opacity-tiny">Copyright © 2019 - 2020 论坛</p>
+    </div>
+</footer>
+
+
+<!--尾部内容-->
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-large">
+    <div class="ui center aligned container">
+        <p class="m-text-spaced m-text-thin m-opacity-tiny">Copyright © 2019 - 2020 卓越论坛</p>
+    </div>
+</footer>
+
+<div th:replace="_fragments :: scripts">
+</div>
+<script src="../static/js/cropper.min.js" th:src="@{/js/cropper.min.js}"></script>
+<script src="../static/js/imgup.js" th:src="@{/js/imgup.js}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>写帖子 - 卓越论坛</title>
+    <link rel="stylesheet" href="../static/css/mystyle.css" th:href="@{css/mystyle.css}">
+    <!-- 网站说明 -->
+    <meta name="description" content="卓越论坛-一个用于学习的论坛!">
+    <!-- 网站关键字 -->
+    <meta name="Keywords" content="论坛,学习">
+    <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon" th:href="@{/images/favicon.ico}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/semantic-ui/2.4.1/semantic.min.css"
+          th:href="@{/semantic-ui/2.4.1/semantic.min.css}">
+    <link rel="stylesheet" href="../static/css/mystyle.css" th:href="@{/css/mystyle.css}">
+    <link rel="stylesheet" href="../static/lib/editormd/css/editormd.min.css"
+          th:href="@{/lib/editormd/css/editormd.min.css}">
+    <script rel="script" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script rel="script" th:src="@{Layui/layui.js}"></script>
+</head>
+<body>
+
+<!--导航条-->
+<nav th:replace="_fragments :: menu(3)" class="ui attached blue segment m-padded-tb-none m-shadow-small">
+    <div class="ui container">
+        <div class="ui stackable secondary menu">
+            <h2 class="ui m-item item blue header m-mobile-show">卓越论坛</h2>
+            <a href="#" class="m-item item m-mobile-none">
+                <img src="../static/images/zyfourm.png" alt="" class="ui image">
+            </a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>帖子</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="bookmark icon"></i>论坛</a>
+            <a href="#" class="m-item item active blue m-mobile-hide"><i class="th icon"></i>版块</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="flag outline icon"></i>活动</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="question circle icon"></i>个人信息</a>
+            <div class="m-item item menu m-mobile-hide">
+                <div class="ui icon input">
+                    <form name="search" action="#" target="_blank" method="post">
+                        <div class="ui action left input">
+                            <input name="query" type="text" placeholder="搜索...">
+                            <div class="ui animated button fade">
+                                <div class="visible content">搜索</div>
+                                <div class="hidden content">
+                                    <i class="search icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <a href="#" id="model" class="m-item m-mobile-hide item extra"><i class="sign-in icon"></i>登录</a>
+            <div style="display: none" class="ui item">
+                <div class="ui icon top pointing dropdown">
+                    <img src="../static/images/user.png" alt="" class="ui avatar image">
+                    <i class="list icon"></i>
+                    <div style="right: -35px;" class="menu" data-filtered="filtered">
+                        <div class="header" data-filtered="filtered"><h5>卓越科技</h5></div>
+                        <a href="#" class="item" data-filtered="filtered">用户信息</a>
+                        <div class="item" data-filtered="filtered">设&nbsp;&nbsp;置</div>
+                        <div class="ui divider" data-filtered="filtered"></div>
+                        <div class="item" data-filtered="filtered">登&nbsp;&nbsp;出</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--移动端 下拉菜单-->
+    <a href="#" class="ui menu toggle icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--个人信息-->
+<div class="ui userInfo flowing popup transition hidden">
+    <div>
+        <div style="width: 250px">
+            <h3>卓越科技</h3>
+            粉丝数：<span>0</span>
+            <div class="ui divider"></div>
+            <a href="">●私信</a>
+            <a href="">●消息</a>
+            <a href="">●个人资料</a>
+            <br>
+            <div class="ui mini teal button">
+                退出
+            </div>
+            <div class="ui mini button">
+                设置
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--中间内容-->
+<div id="waypoint" class="ui container m-padded-tb-big">
+    <div class="ui breadcrumb">
+        <a class="section"><i class="home icon"></i></a>
+        <i class="right angle icon divider"></i>
+        <a class="section" th:text="${edit.mode}">板块</a>
+    </div>
+    <div class="ui segment">
+        <div class="ui pointing secondary menu">
+            <a class="item active" data-tab="first">发表帖子</a>
+        </div>
+        <div class="ui tab active" data-tab="first">
+            <div class="ui container">
+                <form action="" method="post" class="ui form" id="form">
+                    <div class="three fields">
+                        <div class="required field">
+                            <div class="ui left labeled fluid input">
+                                <label class="ui blue basic label">标题</label>
+                                <input type="text" name="title" placeholder="请输入标题...">
+                            </div>
+                        </div>
+                        <div class="required field">
+
+                            <div class="ui left labeled action input">
+                                <label class="ui compact blue basic label">分区</label>
+                                <div class="ui fluid selection dropdown">
+                                    <i class="dropdown icon"></i>
+                                    <div class="default text" th:text="${edit.parent}">分区</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="required field">
+                            <div class="ui left labeled action input">
+                                <label class="ui compact blue basic label">板块</label>
+                                <div class="ui fluid selection dropdown">
+                                    <i class="dropdown icon"></i>
+                                    <div class="default text" th:text="${edit.son}">板块</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="editor" style="z-index: 1" class="m-margin-top">
+                        <textarea style="display:none;"></textarea>
+                    </div>
+                    <input name="son" type="hidden" th:value="${edit.son}">
+                    <input name="sid" type="hidden" th:value="${edit.sid}">
+                    <div class="ui right aligned container">
+                        <button type="button" th:id="post" class="ui secondary button"
+                                th:if="${#strings.equals(edit.mode,'编辑')}">保存
+                        </button>
+                        <button type="button" th:id="post" class="ui blue button"
+                                th:if="${#strings.equals(edit.mode,'发帖')}">发布
+                        </button>
+                    </div>
+                </form>
+                <script type="text/javascript" th:inline="javascript">
+                    $('#post').click(function () {
+                        alert('我被点了');
+                        var serialize = $('#form').serialize();
+                        $.post([[${edit.dopost}]], serialize, function (data) {
+                            var result = "失败";
+                            if (data.flag === true)
+                                result = "成功";
+                            layui.use('layer', function () {
+                                var layer = layui.layer;
+                                layer.msg([[${edit.mode}]] + result, {time: 800});
+                            })
+                        }, 'json')
+                    })
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部导航条-->
+<div th:replace="_fragments :: toolbar" id="toolbar" class="ui m-fixed m-right-bottom m-padded" style="display: none">
+    <div class="ui vertical icon buttons">
+        <a id="toTop-button" class="ui icon button"><i class="up chevron icon"></i></a>
+    </div>
+</div>
+
+<!--尾部内容-->
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-large">
+    <div class="ui center aligned container">
+        <p class="m-text-spaced m-text-thin m-opacity-tiny">Copyright © 2019 - 2020 卓越论坛</p>
+    </div>
+</footer>
+
+<div th:replace="_fragments :: scripts">
+</div>
+<script src="../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
+<script src="../static/js/edit.js" th:src="@{/js/edit.js}"></script>
+
+</body>
+</html>
